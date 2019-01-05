@@ -34,6 +34,7 @@ extern rgblight_config_t rgblight_config;
 #define RGB_COLOR_RED   0x02, 0x00, 0x00
 #define RGB_COLOR_GREEN 0x00, 0x02, 0x00
 #define RGB_COLOR_BLUE  0x00, 0x00, 0x02
+#define RGB_COLOR_PERPLE 0x10, 0x02, 0x10
 #define RGB_COLOR_WHITE 0x02, 0x02, 0x02
 
 
@@ -49,9 +50,10 @@ extern rgblight_config_t rgblight_config;
 #define _WINUS     0  // USキー配列キーボードで、WINDOWS JIS 接続。記号はUS配列のまま利用できる
 #define _SHIFT     1  // 上記シフト時用レイヤ
 #define _MOVE      3  // 移動、マクロなど各種機能用レイヤ
-#define _MACMOVE   5  // US MACを利用するときの機能用レイヤ
-#define _MACUS     6  // US MACにキーボードを接続して利用する場合のレイヤ 接続後に _RGBFNC レイヤの Mキーにて切り替え
+#define _MACUS     5  // US MACにキーボードを接続して利用する場合のレイヤ 接続後に _RGBFNC レイヤの Mキーにて切り替え
                       // 戻るときは右矢印の上にあるキーにて戻る
+#define _MACSHIFT  6  // 上記シフト時用レイヤ
+#define _MACMOVE   7  // US MACを利用するときの機能用レイヤ
 #define _RGBFNC   10  // MINT60の初期設定機能レイヤを一部改変
 
 
@@ -78,6 +80,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  LM(_SHIFT,MOD_LSFT), KC_Z, KC_X,    KC_C,    KC_V,    KC_B,      KC_N,    KC_M,  JP_COMM, JP_DOT,  JP_SLSH, LM(_SHIFT,MOD_RSFT),   KC_UP, KC_CALC, \
     MO(_RGBFNC),    KC_LCTL,  KC_LGUI,   KC_LALT,  LT(_MOVE,KC_SPC),        KC_SPC,  LT(_MOVE,KC_SPC),  LALT(KC_GRV),        KC_LEFT,KC_DOWN,KC_RGHT \
   ),
+
   // USキーボードでWINDOWS JIS接続のSHIFT時レイヤ _______ の透過部分は MOD_LSFT でシフトキー押下状態で透過
   [_SHIFT] = LAYOUT( \
     JP_TILD, JP_EXLM,   JP_AT, JP_HASH,  JP_DLR, JP_PERC,   JP_CIRC, JP_AMPR, JP_ASTR, JP_LPRN, JP_RPRN, JP_UNDS, JP_PLUS, _______,       \
@@ -86,6 +89,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX,       _______, _______, _______, _______, _______,   _______, _______,  JP_LT,   JP_GT, JP_QUES, _______, _______, _______, \
     _______,   _______,   _______,   _______,     _______,        _______, _______, _______, _______, _______, _______ \
   ),
+
   // USキーボードでWINDOWS JIS接続の移動時レイヤ vim キーバインドライク
   [_MOVE] = LAYOUT( \
      JP_GRV,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,     KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_PSCR,     \
@@ -94,30 +98,41 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______,       _______, _______, _______, _______, _______,    KC_END, _______, _______, _______, _______, _______, _______, _______, \
     _______,   _______,   _______,   _______,     _______,        JP_ZHTG, _______, _______, _______, _______, _______ \
   ),
-  // MAC OS 移動用レイヤ _MOVEレイヤを活用するため _MOVE レイヤの直上に配置
-  [_MACMOVE] = LAYOUT( \
-     KC_GRV, _______, _______, _______, _______, _______,   _______, _______, _______, _______, _______, _______, _______, _______,       \
-    _______,   XXXXXXX, XXXXXXX, _______, _______, _______,   _______, _______, _______, _______, _______, _______, _______, _______,     \
-    _______,     XXXXXXX, _______, _______, _______, _______,   _______, _______, _______, _______, _______, _______, _______,   \
-    _______,       _______, _______, _______, _______, _______,   _______, _______, _______, _______, _______, _______, _______, _______, \
-    _______,   _______,   _______,   _______,     _______,        LGUI(KC_SPC), _______, _______, _______, _______, _______ \
-  ),
+
   // USキーボード MAC OS を利用する
   [_MACUS] = LAYOUT( \
-    KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,    KC_BSPC,  \
+    KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,    KC_BSPC,  \
     KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC, KC_BSLS,  \
     KC_LCTL,     KC_A,    KC_S,    KC_D,    KC_F,    KC_G,      KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,        KC_ENT,   \
-    KC_LSFT,       KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,      KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,   KC_UP,  DF(_WINUS),   \
+ LM(_MACSHIFT,MOD_LSFT),       KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,      KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, LM(_MACSHIFT,MOD_RSFT),   KC_UP,  TO(_WINUS),   \
  MO(_RGBFNC),    KC_LCTL,    KC_LALT,  KC_LGUI,  LT(_MACMOVE,KC_SPC),        KC_SPC, LT(_MACMOVE,KC_SPC), LALT(KC_GRV),  KC_LEFT,KC_DOWN,KC_RGHT \
   ),
+
+  [_MACSHIFT] = LAYOUT( \
+     KC_GRV, _______, _______, _______, _______, _______,   _______, _______, _______, _______, _______, _______, _______, _______,       \
+    _______,   _______, _______, _______, _______, _______,   _______, _______, _______, _______, _______, _______, _______, _______,     \
+    _______,     _______, _______, _______, _______, _______,   _______, _______, _______, _______, _______, _______, _______,   \
+    _______,       _______, _______, _______, _______, _______,   _______, _______, _______, _______, _______, _______, _______, _______, \
+    _______,   _______,   _______,   _______,     _______,        _______, _______, _______, _______, _______, _______ \
+  ),
+  // MAC OS 移動用レイヤ _MOVEレイヤを活用するため _MOVE レイヤの直上に配置
+  [_MACMOVE] = LAYOUT( \
+     KC_GRV,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,     KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_PSCR,     \
+    _______,   _______, _______, _______, _______, _______,   _______, KC_PGUP, KC_HOME, _______, _______, _______, _______, _______,     \
+    KC_CAPS,    _______, _______, KC_PGDN, _______, _______,   KC_LEFT,KC_DOWN,    KC_UP,  KC_RGHT,  KC_INS,   KC_DEL,      _______,     \
+    _______,       _______, _______, _______, _______, _______,    KC_END, _______, _______, _______, _______, _______, _______, _______, \
+    _______,   _______,   _______,   _______,     _______,       _______, _______, _______, _______, _______, _______ \
+  ),
+
   // MINT60 機能レイヤ
   [_RGBFNC] = LAYOUT( \
     KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,     KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,    KC_DEL, \
     RGB_TOG,   RGBRST,  RGB_HUI, RGB_SAI, RGB_VAI, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
     XXXXXXX,     RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,        XXXXXXX, \
-    _______,       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   DF(_MACUS), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, KC_PGUP, _______, \
+    _______,       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, TO(_MACUS), XXXXXXX, XXXXXXX, XXXXXXX, _______, KC_PGUP, _______, \
     XXXXXXX,   _______,    _______,    _______,    XXXXXXX,       XXXXXXX, XXXXXXX, XXXXXXX,                   KC_HOME, KC_PGDN, KC_END \
   )
+
   /* レイヤ作成用テンプレ
    * [_ALLTRNS] = LAYOUT( \
     _______, _______, _______, _______, _______, _______,   _______, _______, _______, _______, _______, _______, _______, _______,       \
@@ -219,12 +234,16 @@ uint32_t layer_state_set_user(uint32_t state) {
       rgblight_setrgb(RGB_COLOR_BLUE);
       break;
 
-    case _MACMOVE:
-      rgblight_setrgb(RGB_COLOR_BLUE);
-      break;
-
     case _MACUS:
       rgblight_setrgb(RGB_COLOR_WHITE);
+      break;
+
+    case _MACSHIFT: // _SHIFTレイヤ時
+      rgblight_setrgb(RGB_COLOR_GREEN); // RGB LIGHT を光らせる
+      break;
+
+    case _MACMOVE:
+      rgblight_setrgb(RGB_COLOR_BLUE);
       break;
 
     case _RGBFNC:

@@ -22,6 +22,6 @@
 
 // tappimg configure
 #define TAPPING_FORCE_HOLD
-#define TAPPING_TERM 150
+#define TAPPING_TERM 170
 
 // #define MASTER_RIGHT
