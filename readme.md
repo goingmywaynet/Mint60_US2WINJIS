@@ -1,4 +1,4 @@
-# Mint60_US2WIJIS"
+# Mint60_US2WIJIS
 
 ## Mint60 キーボードの keymap.c 改造版
 
