@@ -1,0 +1,159 @@
+[
+  {
+    "name": "Mint60_US2WINJIS (Windows面)",
+    "author": "Joey Chen",
+    "notes": "### 概要\nUSキー配列を日本語版Windows（JISキー配列）で使うための keymap。\n主に記号を強制的にUSキー物理配列にあわせて組み替えている。\nまた、カーソル移動用のショートカットキーレイヤとして、vimライクなレイヤを準備。\nマクロについては、サンプル実装しており、詳細は keymap.c の中身参照。\n\n### レイヤ毎のキーコード配置について\n- キーの上段から表示に従って以下の通り配置している。\n    - _MOVE レイヤ（有効時、青色LED）\n    - _SHIFTレイヤ（有効時、緑色LED)\n    - _USJISレイヤ（基本レイヤ。有効時、点灯なし）\n- レイヤの移動は基本 レイヤ名記載のあるキーを押しっぱなしの間に有効\n- _RGB レイヤはMint60のFnキー押下時レイヤとして残している。",
+    "switchMount": "cherry",
+    "switchBrand": "gateron",
+    "switchType": "KS-3-Red",
+    "pcb": true
+  },
+  [
+    {
+      "c": "#404040",
+      "t": "#6c69db\n#e8cfcf\n\n\n\n\n#10f50f",
+      "a": 5
+    },
+    "`\nEsc\n\n\n\n\n~",
+    "F1\n1\n\n\n\n\n!",
+    "F2\n2\n\n\n\n\n@",
+    "F3\n3\n\n\n\n\n#",
+    "F4\n4\n\n\n\n\n$",
+    "F5\n5\n\n\n\n\n%",
+    {
+      "x": 4.25
+    },
+    "F6\n6\n\n\n\n\n^",
+    "F7\n7\n\n\n\n\n&",
+    "F8\n8\n\n\n\n\n*",
+    "F9\n9\n\n\n\n\n(",
+    "F10\n0\n\n\n\n\n)",
+    "F11\n-\n\n\n\n\n_",
+    "F12\n=\n\n\n\n\n+",
+    {
+      "t": "#6c69db\n#e8cfcf",
+      "w": 2
+    },
+    "Prt Scr\nBack Space"
+  ],
+  [
+    {
+      "w": 1.5
+    },
+    "\nTab",
+    "CtAlDel\nQ",
+    "Alt+F4\nW",
+    "\nE",
+    "\nR",
+    "\nT",
+    {
+      "x": 4.25
+    },
+    "\nY",
+    "PgUP\nU",
+    "Home\nI",
+    "\nO",
+    "\nP",
+    {
+      "t": "#6c69db\n#e8cfcf\n\n\n\n\n#10f50f"
+    },
+    "\n[\n\n\n\n\n{",
+    "\n]\n\n\n\n\n}",
+    {
+      "w": 1.5
+    },
+    "\n\\\n\n\n\n\n|"
+  ],
+  [
+    {
+      "t": "#6c69db\n#e8cfcf",
+      "w": 1.75
+    },
+    "Caps Lock\nCtrl",
+    "マクロ\nA",
+    "\nS",
+    "PgDown\nD",
+    "\nF",
+    "\nG",
+    {
+      "x": 4.25
+    },
+    "←\nH",
+    "↓\nJ",
+    "↑\nK",
+    "→\nL",
+    {
+      "t": "#6c69db\n#e8cfcf\n\n\n\n\n#10f50f"
+    },
+    "Ins\n;\n\n\n\n\n:",
+    "Del\n'\n\n\n\n\n\"",
+    {
+      "t": "#6c69db\n#e8cfcf",
+      "w": 2.25
+    },
+    "\nEnter"
+  ],
+  [
+    {
+      "w": 2
+    },
+    "\n_SHIFT",
+    "\nZ",
+    "\nX",
+    "\nC",
+    "\nV",
+    "\nB",
+    {
+      "x": 4.25
+    },
+    "End\nN",
+    "\nM",
+    {
+      "t": "#6c69db\n#e8cfcf\n\n\n\n\n#10f50f"
+    },
+    "\n,\n\n\n\n\n<",
+    "\n.\n\n\n\n\n>",
+    "\n/\n\n\n\n\n?",
+    {
+      "t": "#6c69db\n#e8cfcf"
+    },
+    "\n_SHIFT",
+    "\n↑",
+    "\nCalc"
+  ],
+  [
+    "\n_RGB",
+    {
+      "w": 1.25
+    },
+    "\nCtrl",
+    {
+      "w": 1.25
+    },
+    "\nGUI",
+    {
+      "w": 1.25
+    },
+    "\nAlt",
+    {
+      "w": 2.25
+    },
+    "\nSpace, _MOVE",
+    {
+      "x": 4,
+      "w": 1.25
+    },
+    "漢字\nSpace",
+    {
+      "w": 2.75
+    },
+    "\nSpace, _MOVE",
+    {
+      "w": 1.25
+    },
+    "\nCtrl",
+    "\n←",
+    "\n↓",
+    "\n→"
+  ]
+]
