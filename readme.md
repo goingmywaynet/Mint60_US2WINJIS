@@ -1,10 +1,14 @@
-# Mint60_US2WIJIS
+# Mint60_US2WINJIS
 
 ## Mint60 キーボードの keymap.c 改造版
 
 USキー物理配列のキーボードを Windows JIS配列 OS に接続して利用するための keymap.c とか
 
 変更のあるファイルのみ配置しているので、利用する場合は qmk_firmware のオリジナルを展開した上で上書きして利用してください。
+
+Make example for this keyboard (after setting up your build environment):
+
+    make mint60:US2WINJIS
 
 ## Mint60 オリジナルreadme
 
