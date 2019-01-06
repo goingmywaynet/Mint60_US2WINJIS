@@ -1,6 +1,6 @@
 [
   {
-    "name": "Mint60_US2WINJIS (Windows面)",
+    "name": "Mint60_US2WINJIS(Windows_Layers)",
     "author": "Joey Chen",
     "notes": "### 概要\nUSキー配列を日本語版Windows（JISキー配列）で使うための keymap。\n主に記号を強制的にUSキー物理配列にあわせて組み替えている。\nまた、カーソル移動用のショートカットキーレイヤとして、vimライクなレイヤを準備。\nマクロについては、サンプル実装しており、詳細は keymap.c の中身参照。\n\n### レイヤ毎のキーコード配置について\n- キーの上段から表示に従って以下の通り配置している。\n    - _MOVE レイヤ（有効時、青色LED）\n    - _SHIFTレイヤ（有効時、緑色LED)\n    - _USJISレイヤ（基本レイヤ。有効時、点灯なし）\n- レイヤの移動は基本 レイヤ名記載のあるキーを押しっぱなしの間に有効\n- _RGB レイヤはMint60のFnキー押下時レイヤとして残している。",
     "switchMount": "cherry",
@@ -34,10 +34,19 @@
       "t": "#6c69db\n#e8cfcf",
       "w": 2
     },
-    "Prt Scr\nBack Space"
+    "Prt Scr\nBack Space",
+    {
+      "x": 0.75,
+      "t": "#ffffff\n\n\n\n\n\n\n\n#6c69db\n#10f50f\n#e8cfcf",
+      "a": 4,
+      "w": 3
+    },
+    "レイヤ\n\n\n\n\n\n\n\n_MOVE\n_SHIFT\n_USJIS"
   ],
   [
     {
+      "t": "#6c69db\n#e8cfcf",
+      "a": 5,
       "w": 1.5
     },
     "\nTab",
