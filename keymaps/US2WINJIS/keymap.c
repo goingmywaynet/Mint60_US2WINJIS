@@ -61,12 +61,15 @@ extern rgblight_config_t rgblight_config;
 #define _______ KC_TRNS            // 若番側レイヤのキーコードを使う
 #define XXXXXXX KC_NO              // 無効キー
 #define ALT_F4  LALT(KC_F4)        // ALT + F4
+#define WN_CALC LCTL(LALT(KC_C))   // CTRL + ALT + C
 #define C_A_D   LCTL(LALT(KC_DEL)) // CTRL + ALT + DELETE
 
 // 独自キーコード定義
 enum custom_keycodes {
   RGBRST = SAFE_RANGE,
   WN_SCLN,              // JIS の「;」と「:」
+  WN_2AT,               // JIS の「2」と「@」
+  WN_6CIRC,             // JIS の「6」と「^」
   MCR1                  // マクロ1
 };
 
@@ -74,16 +77,16 @@ enum custom_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // USキーボードでWINDOWS JIS接続基本レイヤ
   [_WINUS] = LAYOUT( \
-    KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    JP_MINS, JP_EQL,    KC_BSPC,  \
+    KC_ESC,  KC_1,    WN_2AT,    KC_3,    KC_4,    KC_5,    WN_6CIRC, KC_7,    KC_8,    KC_9,    KC_0,    JP_MINS, JP_EQL,    KC_BSPC,  \
     KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    JP_LBRC, JP_RBRC, JP_YEN,  \
     KC_LCTL,     KC_A,    KC_S,    KC_D,    KC_F,    KC_G,      KC_H,    KC_J,    KC_K,    KC_L,    WN_SCLN, JP_QUOT,        KC_ENT,   \
- LM(_SHIFT,MOD_LSFT), KC_Z, KC_X,    KC_C,    KC_V,    KC_B,      KC_N,    KC_M,  JP_COMM, JP_DOT,  JP_SLSH, LM(_SHIFT,MOD_RSFT),   KC_UP, KC_CALC, \
-    MO(_RGBFNC),    KC_LCTL,  KC_LGUI,   KC_LALT,  LT(_MOVE,KC_SPC),        KC_SPC,  LT(_MOVE,KC_SPC),  LALT(KC_GRV),        KC_LEFT,KC_DOWN,KC_RGHT \
+ LM(_SHIFT,MOD_LSFT), KC_Z, KC_X,    KC_C,    KC_V,    KC_B,      KC_N,    KC_M,  JP_COMM, JP_DOT,  JP_SLSH, LM(_SHIFT,MOD_RSFT),   KC_UP, WN_CALC, \
+    MO(_RGBFNC),    KC_LCTL,  KC_LGUI,   KC_LALT,  LT(_MOVE,KC_SPC),         LT(_MOVE,KC_SPC), KC_SPC,  LALT(KC_GRV),        KC_LEFT,KC_DOWN,KC_RGHT \
   ),
 
   // USキーボードでWINDOWS JIS接続のSHIFT時レイヤ _______ の透過部分は MOD_LSFT でシフトキー押下状態で透過
   [_SHIFT] = LAYOUT( \
-    JP_TILD, JP_EXLM,   JP_AT, JP_HASH,  JP_DLR, JP_PERC,   JP_CIRC, JP_AMPR, JP_ASTR, JP_LPRN, JP_RPRN, JP_UNDS, JP_PLUS, _______,       \
+    JP_TILD, JP_EXLM,  _______, JP_HASH,  JP_DLR, JP_PERC,   _______, JP_AMPR, JP_ASTR, JP_LPRN, JP_RPRN, JP_UNDS, JP_PLUS, _______,       \
     _______,   _______, _______, _______, _______, _______,   _______, _______, _______, _______, _______, JP_LCBR, JP_RCBR, JP_PIPE,     \
     _______,     _______, _______, _______, _______, _______,   _______, _______, _______, _______, _______,    JP_DQT,      _______,   \
     XXXXXXX,       _______, _______, _______, _______, _______,   _______, _______,  JP_LT,   JP_GT, JP_QUES, _______, _______, _______, \
@@ -198,6 +201,42 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           } else {
             register_code(JP_SCLN);
             unregister_code(JP_SCLN);
+          }
+        }
+        return false;
+        break;
+    case WN_2AT:                // JIS の「2」と「@」を模擬するための実装
+        if (record->event.pressed) {
+          lshift = keyboard_report->mods & MOD_BIT(KC_LSFT);
+          rshift = keyboard_report->mods & MOD_BIT(KC_RSFT);
+          if (lshift || rshift) {
+            if (lshift) unregister_code(KC_LSFT);
+            if (rshift) unregister_code(KC_RSFT);
+            register_code(JP_AT);
+            unregister_code(JP_AT);
+            if (lshift) register_code(KC_LSFT);
+            if (rshift) register_code(KC_RSFT);
+          } else {
+            register_code(KC_2);
+            unregister_code(KC_2);
+          }
+        }
+        return false;
+        break;
+    case WN_6CIRC:                // JIS の「6」と「^」を模擬するための実装
+        if (record->event.pressed) {
+          lshift = keyboard_report->mods & MOD_BIT(KC_LSFT);
+          rshift = keyboard_report->mods & MOD_BIT(KC_RSFT);
+          if (lshift || rshift) {
+            if (lshift) unregister_code(KC_LSFT);
+            if (rshift) unregister_code(KC_RSFT);
+            register_code(JP_CIRC);
+            unregister_code(JP_CIRC);
+            if (lshift) register_code(KC_LSFT);
+            if (rshift) register_code(KC_RSFT);
+          } else {
+            register_code(KC_6);
+            unregister_code(KC_6);
           }
         }
         return false;
